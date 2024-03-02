@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html port>
+<head>
+<title>FLYFEET</title>
+<style>
+
+body       
+{
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;text-align: center;margin: 0; padding: 0; background-image: url('https://i.pinimg.com/236x/18/77/f3/1877f3f6cf31d3f791096b80bb229456.jpg');background-size: cover; background-repeat: no-repeat;
+}  
+
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.popup-content {
+  background-color:black;
+  margin: 10% auto;
+  color: orangered;
+  padding: 20px;
+  list-style-type: none;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.popup-content ol {
+  margin-top: 50px; /* Adjust as needed */
+  list-style-type: none;
+}
+
+.popup-content ol li {
+  margin-bottom: 50px; /* Adjust as needed */
+}
+.container 
+ {display: flex;justify-content: center;align-items: center;flex-wrap: wrap; }
+img        
+ { margin:0; height: auto;width: auto;margin: 10px;margin-top: 5%;}
+
+.footer{bottom: 0;left: 0;width: 100%;background-color: black;color: white;text-align: center;font-size: 15px;margin-bottom: 0%;}
+h2       
+{font-size: 150px;color:orangered;align-items: center;display:flex;  margin-top:auto;   margin-bottom: 0%;background-color: black;}
+
+h3 {font-size:20px;color:gray;align-items:left;display:flex;margin-top: 0%;  margin-bottom: 0%;padding: 0;background-color: black;}
+h4 
+{ background-color:black;
+ font-size: 20px;
+color: burlywood; 
+animation: blink 2s infinite alternate; 
+margin-top: 10px;
+margin-top: 0%; margin-bottom: 0%;}
+h6       
+{   margin-top: auto;
+    color:orangered;
+    background-color:black;
+    font-size: 40px;
+    width: 100%;
+    text-align: center;}
+button     
+  { margin-top: 20px;
+    background-color:black;
+    color:white; 
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 8px;
+    opacity: 0.7;
+    margin: 7px; 
+    border: 2px solid #333;
+    margin-right: 100%; } 
+
+ @keyframes blink {0% { opacity: 1;}100% { opacity: 0.3;}}
+
+.productName       { margin-top: 10px;font-weight:normal; font-size: 15px;}
+.productContainer  { display: flex;flex-wrap: wrap; justify-content: space-around; gap: 20px;}
+.productItem       { text-align: center;max-width: 300px;}
+.productImage      {width: 100%;height:60%;cursor: pointer;}
+.productImage2     {width: 100%;height:90%;cursor: pointer;}
+.price             {display: none; font-weight: bold; }
+.addToCartButton   { display: none; }
+.topnav            {overflow: hidden;background-color:black; position: fixed; width: 100%;margin-bottom:5%;margin-top:0%;}
+.topnav a          { float: left; color:white;text-align: center ;padding: 14px 16px;font-size: 17px;margin-top: 0%; text-decoration: none;}
+.topnav a:hover    { background-color:black;color:red;}
+.topnav input[type=text] {float: right;padding: 6px;margin-top: 8px;margin-right: 16px;border: none;font-size: 17px;}
+@media screen and (max-width: 600px) 
+{}
+
+.mySlides             {display: flex; margin-bottom: 0%;}
+.slideshow-container  {max-width: 1000px;position: relative;margin: auto; margin-bottom: 0%;padding: 0;margin-top: 0%;}
+.active               {background-color: #717171;}
+.fade                 {animation-name:none;animation-duration: 1.5s;}
+@keyframes fade       {from {opacity: .4} to {opacity: 1}}
+
+@media only screen and (max-width: 300px)    {.text {font-size: 11px}}
+.footer-container { display: flex; justify-content:space-evenly; align-items:flex-start; margin: 3rem; margin-bottom: 0%; size: 40px;height: 350px;}
+.fixed-footer     { position: fixed; bottom: 0; left: 0; width: 100%; background-color: black; color:orangered; text-align: center; font-size: 20px; height: 50px; /* Adjust the height as needed */}
+.footer-box       {display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-bottom: 0%;}
+
+.footer-box h3   
+  { font-size: 1.7rem;
+    padding: 0.5rem; 
+    color: orangered;
+     margin-bottom: 0%;
+}
+.footer-box a      
+{font-size: 1.2rem;
+    color: white;  
+    text-decoration: none;
+    padding: 0.5rem;
+}
+
+.footer-box a:hover{color: rgb(84, 211, 215);}
+
+       </style>
+       <script>
+        function showPrice(productId) {
+        
+            var priceElement = document.getElementById(`price-${productId}`);
+            
+            
+            if (priceElement.style.display === "none") {
+                priceElement.style.display = "block";
+
+                document.getElementById(`addToCartButton-${productId}`).style.display = "block";
+            } else {
+                priceElement.style.display = "none";
+
+                document.getElementById(`addToCartButton-${productId}`).style.display = "none";
+            }
+        }
+
+        function addToCart(productId) {
+            
+            alert(`Product ${productId} added to cart!`);
+        }
+        function toggleDropdown() {
+    var dropdown = document.getElementById("sneakersDropdown");
+    dropdown.classList.toggle("show"); 
+}
+    </script>
+ <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("sneakersDropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+    </script>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+        
+        function showSlides() {
+          let i;
+          let slides = document.getElementsByClassName("mySlides");
+          let dots = document.getElementsByClassName("dot");
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) {slideIndex = 1}    
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " active";
+          setTimeout(showSlides, 2000);
+        }
+        </script>
+        <script>
+function openPopup() {
+  // Get the pop-up element
+  var popup = document.getElementById("popup");
+  // Display the pop-up
+  popup.style.display = "block";
+}
+
+function closePopup() {
+  // Get the pop-up element
+  var popup = document.getElementById("popup");
+  // Hide the pop-up
+  popup.style.display = "none";
+}
+
+</script>
+</head>
+
+
+
+
+<body> 
+    <h1></h1>
+    <div id="popup" class="popup" >
+        <div class="popup-content">
+          <span class="close" onclick="closePopup()">&times;</span>
+        <ol>
+            <li>Air Force 1 </li>
+            <li>Air Jordans Mid</li> 
+            <li>Air Jordan High </li> 
+            <li>Yeezys</li> 
+            <li> Low dunks</li>
+        </ol>
+        </div>
+      </div>
+<div class="topnav">
+    
+    <a class="active" href="#home">Home</a>
+    <a href="#" onclick="openPopup()">Sneakers</a>
+    <a href="aboutus.html">About Us</a>
+    <a href="track.html">Track Orders</a>
+    <a href="faq.html">FAQ</a>
+    
+   
+    <input type="text" placeholder="Search..">
+    </div
+     
+<br>
+<br>
+<br>
+
+<h2> FLY FEET</h2>
+<h3> Where Comfort Meets Style</h3>
+<h4>
+  <div class="slideshow-container">
+    <div class="mySlides fade">
+    <img src="" style="width:100%">
+    </div>
+    
+    <div class="mySlides fade">
+    <img src="FLYFEET BACKGROUND.jpeg" style="width:100%">
+    </div>
+    
+    <div class="mySlides fade">
+    <img src="FLYFEET BACKGROUND.jpeg"style="width:100%" height="100%">
+    </div>
+    </div>
+    <br>
+    
+    <div style="text-align:center">
+      <span class="dot"></span> 
+      <span class="dot"></span> 
+      <span class="dot"></span> 
+    </div>
+</h4>
+
+<h5> 
+    <a href="signupsneaker.html">
+        <button> Register</button>
+        <a href="loginform.html">
+            <button >Login</button>   
+    </a>
+</h5>
+<h6> TRENDING HEAT</h6>
+ 
+    <div class="productContainer">
+        <!-- Product 1 -->
+        <div class="productItem">
+            <img class="productImage" src="img1.jpeg" alt="Product 1" onclick="showPrice(1)">
+            <p id="price-1" class="price">Price:74399₹</p>
+                        <p class="productName">JORDAN 1 RETRO HIGH OG COURT PURPLE 2.0</p>
+                         <p class="list">.</p>
+        <button id="addToCartButton-1" class="addToCartButton" onclick="addToCart(1)">Add</button>
+    
+    </div>
+        <!-- Product 2 -->
+        <div class="productItem">
+            
+            <img class="productImage" src="img2.jpeg" alt="Product 2" onclick="showPrice(2)">
+            <p id="price-2" class="price">Price:31199₹</p>
+            <p class="productName">JORDAN 1 RETRO HIGH ELECTRO ORANGE</p>
+            <button id="addToCartButton-2" class="addToCartButton" onclick="addToCart(2)">Add</button>
+        </div>
+    
+        <!-- Product 3 -->
+        <div class="productItem">
+           
+            <img class="productImage" src="img3.jpeg" alt="Product 3" onclick="showPrice(3)">
+            <p id="price-3" class="price">Price: 54999₹</p>
+            <p class="productName">AIR JORDAN 1 RETRO HIGH OG 'DARK MOCHA' </p>
+            <button id="addToCartButton-3" class="addToCartButton" onclick="addToCart(3)">Add</button>
+        </div>
+    
+        <!-- Product 4 -->
+        <div class="productItem">
+           
+            <img class="productImage" src= "img4.jpeg"alt="Product 4" onclick="showPrice(4)">
+            <p id="price-4" class="price">Price:38999₹</p>
+            <p class="productName">JORDAN 1 RETRO HIGH OG CHICAGO LOST AND FOUND</p>
+            <button id="addToCartButton-4" class="addToCartButton" onclick="addToCart(4)">Add</button>
+        </div>
+    
+        <!-- Product 5 -->
+        <div class="productItem">
+        
+            <img class="productImage" src="img5.jpeg" alt="Product 5" onclick="showPrice(5)">
+            <p id="price-5" class="price">Price: 28499₹</p>
+            <p class="productName">AIR JORDAN 1 RETRO HIGH OG Stage Haze'Bleached Coral</p>
+            <button id="addToCartButton-5" class="addToCartButton" onclick="addToCart(5)">Add</button>
+        </div>
+    
+        <!-- Product 6 -->
+        <div class="productItem">
+          
+            <img class="productImage" src= "6666.jpeg"alt="Product 6" onclick="showPrice(6)">
+            <p id="price-6" class="price">Price:31999₹</p>
+            <p class="productName">MARVEL X AIR JORDAN 1 RETRO HIGH OG Next Chapter SPIDERMAN</p>
+            <button id="addToCartButton-6" class="addToCartButton" onclick="addToCart(6)">Add</button>
+        </div>
+    
+        <!-- Product 7 -->
+        <div class="productItem">
+           
+            <img class="productImage" src="img7.jpeg" alt="Product 7" onclick="showPrice(7)">
+            <p id="price-7" class="price">Price: 17499₹</p>
+            <p class="productName">JORDAN 1 RETRO HIGH UNC TOE</p>
+            <button id="addToCartButton-7" class="addToCartButton" onclick="addToCart(7)">Add</button>
+        </div>
+    
+        <!-- Product 8 -->
+        <div class="productItem">
+         
+            <img class="productImage" src= "img8.jpeg"alt="Product 8" onclick="showPrice(8)">
+            <p id="price-8" class="price">Price: 11999₹</p>
+            <p class="productName">AIR JORDAN 1 GALATIC JADE LOW</p>
+            <button id="addToCartButton-8" class="addToCartButton" onclick="addToCart(8)">Add</button>
+        </div>
+        
+        <!-- Product 9 -->
+        <div class="productItem">
+          
+            <img class="productImage" src= "img9.jpeg"alt="Product 9" onclick="showPrice(9)">
+            <p id="price-9" class="price">Price:14999₹ </p>
+            <p class="productName"> AIR JORDAN 1 RETRO LOW OG 'Black Toe'</p>
+            <button id="addToCartButton-9" class="addToCartButton" onclick="addToCart(9)">Add</button>
+        </div>
+        
+        <!-- Product 10 -->
+        <div class="productItem">
+            
+            <img class="productImage" src= "img10.jpeg"alt="Product 10" onclick="showPrice(10)">
+            <p id="price-10" class="price">Price: 15499₹</p>
+            <p class="productName">AIR JORDAN 1 LOW 'Tokyo Vintage UNC Grey</p>
+            <button id="addToCartButton-10" class="addToCartButton" onclick="addToCart(10)">Add</button>
+        </div>
+        
+        <!-- Product 11 -->
+        <div class="productItem">
+         
+            <img class="productImage" src= "img11.jpeg"alt="Product 11" onclick="showPrice(11)">
+            <p id="price-11" class="price">Price: 18499₹</p>
+            <p class="productName"> AIR JORDAN 1 LOW'Light Smoke Grey'</p>
+            <button id="addToCartButton-11" class="addToCartButton" onclick="addToCart(11)">Add to</button>
+        </div>
+        
+        <!-- Product 12 -->
+        <div class="productItem">
+          
+            <img class="productImage" src= "img9.jpeg"alt="Product 12" onclick="showPrice(12)">
+            <p id="price-12" class="price">Price:17000₹</p>
+            <p class="productName"> AIR JORDAN 1 RETRO LOW</p>
+            <button id="addToCartButton-12" class="addToCartButton" onclick="addToCart(12)">Add</button>
+        </div>
+      
+  
+
+       </div>
+   <br>
+   <br>
+   <br>
+
+   <h6> APPAREL</h6>
+   <div class="productContainer"> 
+       <!-- Product 17 -->
+       <div class="productItem">
+          
+        <img class="productImage2" src= "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/8c3f0774-f4c2-4870-a688-8dde0380c3b7/paris-saint-germain-brooklyn-fleece-jordan-football-pullover-hoodie-B7XBRs.png"alt="Product 17" onclick="showPrice(17)">
+        <p id="price-17" class="price">Price:17000₹</p>
+        <p class="productName"> </p>
+        <button id="addToCartButton-17" class="addToCartButton" onclick="addToCart(17)">Add</button>
+    </div>
+
+     <!-- Product 18 -->
+     <div class="productItem">
+      
+        <img class="productImage2" src= "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/28b3083f-9172-4c32-a559-0ba68b3042aa/jordan-brooklyn-fleece-pullover-hoodie-pftwK5.png"alt="Product 18" onclick="showPrice(18)">
+        <p id="price-18" class="price">Price:17000₹</p>
+        <p class="productName"> </p>
+        <button id="addToCartButton-18" class="addToCartButton" onclick="addToCart(18)">Add</button>
+    </div>
+
+     <!-- Product 19 -->
+     <div class="productItem">
+        <img class="productImage2" src= "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/d3337c1c-6617-4f8b-817c-52e3fbcf3622/jordan-flight-essentials-oversized-t-shirt-84459x.png"alt="Product 19" onclick="showPrice(19)">
+        <p id="price-19" class="price">Price:17000₹</p>
+        <p class="productName"> </p>
+        <button id="addToCartButton-19" class="addToCartButton" onclick="addToCart(19)">Add</button>
+    </div>
+
+     <!-- Product 20 -->
+     <div class="productItem">
+      
+        <img class="productImage2" src= "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/b4774cab-c100-47fe-b6a0-b7c0350cf3ed/jordan-flight-essentials-oversized-t-shirt-84459x.png"alt="Product 20" onclick="showPrice(20)">
+        <p id="price-20" class="price">Price:17000₹</p>
+        <p class="productName"> </p>
+        <button id="addToCartButton-20" class="addToCartButton" onclick="addToCart(20)">Add</button>
+    </div>
+           <!-- Product 21 -->
+           <div class="productItem">
+          
+            <img class="productImage2" src= "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4f9e3568-b2f3-4ff7-950b-31ec2a5edf0d/dna-repel-basketball-jacket-tlsP6x.png"alt="Product 21" onclick="showPrice(21)">
+            <p id="price-21" class="price">Price:17000₹</p>
+            <p class="productName"> </p>
+            <button id="addToCartButton-21" class="addToCartButton" onclick="addToCart(21)">Add</button>
+        </div>
+    
+         <!-- Product 22 -->
+         <div class="productItem">
+          
+            <img class="productImage2" src= "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/63b5e4ed-53af-46fb-bb15-e4a8d3b8b9d2/culture-of-football-football-jacket-jX7MHn.png"alt="Product 22" onclick="showPrice(22)">
+            <p id="price-22" class="price">Price:17000₹</p>
+            <p class="productName"> </p>
+            <button id="addToCartButton-22" class="addToCartButton" onclick="addToCart(22)">Add</button>
+        </div>
+    
+         <!-- Product 23 -->
+         <div class="productItem">
+            <img class="productImage2" src= "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/8dd0133c-9137-4ecd-baa7-eead1b4d346b/jordan-flight-mvp-long-sleeve-t-shirt-Hd47tL.png" onclick="showPrice(23)">
+            <p id="price-23" class="price">Price:17000₹</p>
+            <p class="productName"> </p>
+            <button id="addToCartButton-23" class="addToCartButton" onclick="addToCart(23)">Add</button>
+        </div>
+    
+         <!-- Product 24 -->
+         <div class="productItem">
+          
+            <img class="productImage2" src= "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/8558cf63-5595-4b34-8af4-bcdceb3ffcb0/jordan-essentials-fleece-pullover-hoodie-Zst2nM.png"alt="Product 24" onclick="showPrice(24)">
+            <p id="price-20" class="price">Price:17000₹</p>
+            <p class="productName"> </p>
+            <button id="addToCartButton-20" class="addToCartButton" onclick="addToCart(20)">Add</button>
+        </div>
+    </div>
+    
+
+
+
+     <!-- Second h4 without animation -->
+  <h4>
+    <div class="slideshow-container">
+      <div class="mySlides fade">
+      <img src="end.jpeg" style="width:100%">
+      </div>
+      
+      <div class="mySlides fade">
+      <img src="FLYFEET BACKGROUND.jpeg" style="width:100%">
+      </div>
+  
+      </div>
+      <br>
+      
+   
+  </h4>
+
+   <section class="footer">
+    <div class="footer-container">
+        <div class="footer-box">
+            <h3>Know more</h3>
+            <a href="#">Shipping</a>
+            <a href="#">Cancellation & Refunds</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terma & Conditions</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <div class="footer-box">
+            <h3>Most Viewed</h3>
+            <a href="#">LOWS</a>
+            <a href="#">Collections</a>
+            <a href="#">Adidas</a>
+            <a href="#">AF 1s</a>
+            <a href="#">My MID</a>
+            <a href="#">My YEEZYS</a>
+        </div>
+
+        <div class="footer-box">
+            <h3>Locations</h3>
+            <a href="#">Mumbai</a>
+            <a href="#">Nashik</a>
+            <a href="#">Pune</a>
+            <a href="#">Indore</a>
+            <a href="#">Delhi</a>
+        </div>
+
+        <div class="footer-box">
+            <h3>Contact info</h3>
+            <a href="#">776655467</a>
+            <a href="#">flyfeet.com</a>
+            <a href="#">Mumbai, Maharashta - 422006</a>
+        </div>
+    </div>
+
+  
+</section>
+<div class="fixed-footer">
+    <p> |  ALL RIGHTS RESERVED @ FLYFEET  |</p>
+</div>
+
+</body>
+</html>

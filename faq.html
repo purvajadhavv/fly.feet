@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLYFEET - FAQ</title>
+    <style>
+         .topnav            {overflow: hidden;background-color:black; position: fixed; width: 100%;margin-bottom:5%;margin-top:0%;}
+.topnav a          { float: left; color:white;text-align: center ;padding: 14px 16px;font-size: 17px;margin-top: 0%; text-decoration: none;}
+.topnav a:hover    { background-color:black;color:red;}
+.topnav input[type=text] {float: right;padding: 6px;margin-top: 8px;margin-right: 16px;border: none;font-size: 17px;}
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .button {
+        display: block;
+        width: 100%;
+        text-align: center;
+       margin-bottom: 0px;
+        margin-bottom: 0%;
+    }
+    .button a {
+        display: inline-block;
+        padding: 10px 20px;;
+        background-color:black;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 0%;
+    }
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .faq-container {
+            max-width: 100%;
+            
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-weight: bold;
+            cursor: pointer;
+        }
+        h1       
+{font-size: 150px;color:orangered;align-items: center;display:flex;  margin-top:50px;   margin-bottom: 0%;}
+        .answer {
+            display: none; 
+            margin-bottom: 20px;
+        }
+
+        .arrow {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 6px 4px 0;
+            border-color: #000 transparent transparent transparent;
+            margin-right: 5px;
+        }
+        .footer      {bottom: 0;left: 0;width: 100%;background-color: black;color: white;text-align: center;font-size: 15px;margin-bottom: 0%;}
+        .footer-container { display: flex; justify-content:space-evenly; align-items:flex-start; margin: 3rem; margin-bottom: 0%; size: 40px;height: 350px;}
+.fixed-footer     { position: fixed; bottom: 0; left: 0; width: 100%; background-color: black; color:orangered; text-align: center; font-size: 20px; height: 50px; /* Adjust the height as needed */}
+.footer-box       {display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-bottom: 0%;}
+
+.footer-box h3   
+  { font-size: 1.7rem;
+    padding: 0.5rem; 
+    color: orangered;
+     margin-bottom: 0%;
+}
+.footer-box a      
+{font-size: 1.2rem;
+    color: white;  
+    text-decoration: none;
+    padding: 0.5rem;
+}
+
+.footer-box a:hover{color: rgb(84, 211, 215);}
+    </style>
+</head>
+<body>
+    <div class="topnav">
+    
+        <a class="active" href="#home">Home</a>
+        <a href="#" onclick="openPopup()">Sneakers</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="track.html">Track Orders</a>
+        <a href="faq.html">FAQ</a>
+        
+       
+        <input type="text" placeholder="Search..">
+      </div>
+    <div class="header">
+        <h1>FLY FEET</h1>
+    </div>
+
+    <div class="faq-container">
+        <h2>FAQ</h2>
+
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer1')">
+                <span class="arrow"></span> 1. How can I cancel my order?
+            </div>
+            <div class="answer" id="answer1">You can cancel your order by contacting our customer support within 24 hours of placing the order.</div>
+        </div>
+        <hr>
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer2')">
+                <span class="arrow"></span> 2. What is your return policy?
+                <br>
+            </div>
+            <div class="answer" id="answer2">Our return policy allows you to return products within 30 days of receiving them. Please check our Returns page for more details.</div>
+        </div>
+        <hr>
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer3')">
+                <span class="arrow"></span> 3. How can I track my order?
+            </div>
+            <div class="answer" id="answer3">You can track your order by visiting the Track Orders page and entering your order number and email address.</div>
+        </div>
+        <hr>
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer4')">
+                <span class="arrow"></span> 4. Do you offer international shipping?
+            </div>
+            <div class="answer" id="answer4">Yes, we offer international shipping. Shipping costs and delivery times may vary depending on the destination.</div>
+        </div>
+        <hr>
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer5')">
+                <span class="arrow"></span> 5. Can I exchange a product for a different size?
+            </div>
+            <div class="answer" id="answer5">Yes, we allow size exchanges. Please contact our customer support for assistance with the exchange process.</div>
+        </div>
+        <hr>
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer6')">
+                <span class="arrow"></span> 6. What payment methods do you accept?
+            </div>
+            <div class="answer" id="answer6">We accept various payment methods, including credit cards, debit cards, and PayPal. Check our Payment Options page for more details.</div>
+        </div>
+        <hr>
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer7')">
+                <span class="arrow"></span> 7. How do I reset my password?
+            </div>
+            <div class="answer" id="answer7">You can reset your password by clicking on the "Forgot Password" link on the login page and following the instructions sent to your email.</div>
+        </div>
+        <hr>
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer8')">
+                <span class="arrow"></span> 8. Are your products authentic?
+            </div>
+            <div class="answer" id="answer8">Yes, all our products are guaranteed to be authentic. We source them directly from authorized retailers.</div>
+        </div>
+       <hr>
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer9')">
+                <span class="arrow"></span> 9. How can I contact customer support?
+            </div>
+            <div class="answer" id="answer9">You can contact our customer support through our Contact Us page or by emailing support@flyfeet.com.</div>
+        </div>
+        <hr>
+        <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('answer10')">
+                <span class="arrow"></span> 10. Do you offer gift cards?
+            </div>
+            <div class="answer" id="answer10">Yes, we offer gift cards. You can purchase them on our website, and they make for a perfect gift for any sneaker enthusiast.</div>
+        </div>
+        <hr>
+        <!-- Add more FAQ items as needed -->
+
+
+    <script>
+        function toggleAnswer(answerId) {
+            var answer = document.getElementById(answerId);
+            answer.style.display = (answer.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
+   <div class="button">
+    <a href="home.html" onclick="redirectToHomePage()">Go to home page</a>
+  </div>
+      
+   <section class="footer">
+    <div class="footer-container">
+        <div class="footer-box">
+            <h3>Know more</h3>
+            <a href="#">Shipping</a>
+            <a href="#">Cancellation & Refunds</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terma & Conditions</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <div class="footer-box">
+            <h3>Most Viewed</h3>
+            <a href="#">LOWS</a>
+            <a href="#">Collections</a>
+            <a href="#">Adidas</a>
+            <a href="#">AF 1s</a>
+            <a href="#">My MID</a>
+            <a href="#">My YEEZYS</a>
+        </div>
+
+        <div class="footer-box">
+            <h3>Locations</h3>
+            <a href="#">Mumbai</a>
+            <a href="#">Nashik</a>
+            <a href="#">Pune</a>
+            <a href="#">Indore</a>
+            <a href="#">Delhi</a>
+        </div>
+
+        <div class="footer-box">
+            <h3>Contact info</h3>
+            <a href="#">776655467</a>
+            <a href="#">flyfeet.com</a>
+            <a href="#">Mumbai, Maharashta - 422006</a>
+        </div>
+    </div>
+
+  
+</section>
+<div class="fixed-footer">
+    <p> |  ALL RIGHTS RESERVED @ FLYFEET  |</p>
+</div>
+
+</body>
+</html>
