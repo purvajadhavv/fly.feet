@@ -72,6 +72,30 @@ button                 {margin-top: 20px;background-color:black;color:white; pad
             
             alert(`Product ${productId} added to cart!`);
         }
+         function showPrice(productId) {
+    var popup = document.getElementById('addToCartPopup');
+    popup.style.display = 'block';
+    
+    // Store the product ID in a global variable to use it later
+    window.currentProductId = productId;
+}
+
+function closeAddToCartPopup() {
+    var popup = document.getElementById('addToCartPopup');
+    popup.style.display = 'none';
+}
+
+function confirmAddToCart() {
+    // Add the product to the cart using the current product ID
+    addToCart(window.currentProductId);
+    
+    // Show a success message
+    alert('Product added successfully!');
+    
+    // Close the pop-up
+    closeAddToCartPopup();
+}
+
         function toggleDropdown() {
     var dropdown = document.getElementById("sneakersDropdown");
     dropdown.classList.toggle("show"); 
@@ -190,6 +214,15 @@ function closePopup() {
         <button id="addToCartButton-1" class="addToCartButton" onclick="addToCart(1)">Add</button>
     
     </div>
+      <div id="addToCartPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closeAddToCartPopup()">&times;</span>
+        <p>Do you want to add the product to your cart?</p>
+        <button onclick="confirmAddToCart()">Yes</button>
+        <button onclick="closeAddToCartPopup()">No</button>
+    </div>
+</div>
+
         <!-- Product 2 -->
         <div class="productItem">
             
