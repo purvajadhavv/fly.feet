@@ -84,13 +84,8 @@ function closeAddToCartPopup() {
 }
 
 function confirmAddToCart() {
-    // Add the product to the cart using the current product ID
-    addToCart(window.currentProductId);
-    
-    // Show a success message
+     addToCart(window.currentProductId);
     alert('Product added successfully!');
-    
-    // Close the pop-up
     closeAddToCartPopup();
 }
 
